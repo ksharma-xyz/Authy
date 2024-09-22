@@ -5,6 +5,7 @@ val logback_version: String by project
 plugins {
     kotlin("jvm") version "2.0.20"
     id("io.ktor.plugin") version "3.0.0-rc-1"
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 group = "com.example"
@@ -22,6 +23,10 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-core:2.3.0")
+    implementation("io.ktor:ktor-server-netty:2.0.0")
+    implementation("io.ktor:ktor-server-call-logging:2.0.0")
+
     implementation("io.ktor:ktor-server-content-negotiation:2.0.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.0")
     implementation("com.google.guava:guava:32.0.1-jre") // For HMAC support
