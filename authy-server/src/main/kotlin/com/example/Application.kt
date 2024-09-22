@@ -25,6 +25,9 @@ fun main() {
         install(CallLogging)
 
         routing {
+            get("/") {
+                call.respondText("Hello Authy!")
+            }
             post("/validate") {
                 val request = call.receive<ValidationRequest>()
                 val isValid = validateTOTP(request.code, request.sharedSecret)
@@ -73,4 +76,12 @@ fun generateTOTP(secret: String, timestamp: Long): String {
 
     val otp = binary % 10.0.pow(6).toInt()
     return otp.toString().padStart(6, '0')
+}
+
+fun Long.toByteArray(): ByteArray {
+    val buffer = ByteArray(8) // A Long is 8 bytes
+    for (i in 7 downTo 0) {
+        buffer[i] = (this shr (i * 8)).toByte()
+    }
+    return buffer
 }
